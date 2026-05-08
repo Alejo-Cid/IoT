@@ -9,7 +9,7 @@
 const char* SSID = "Telecentro-b40f";
 const char* PASSWORD = "MQFYAEGQHMYQ";
 const int LED_PIN = 4; // Flash del esp32 cam en GPIO4
-const int DHT_PIN = 14; // GPI para DATA del DHT22
+const int DHT_PIN = 15; // GPIO 15 mas confiable en ESP32-CAM para DATA del DHT22
 const int DHT_TYPE = DHT22;
 
 DHT dht(DHT_PIN, DHT_TYPE);
@@ -34,7 +34,7 @@ bool readDht22(float &temperature, float &humidity) {
     if (!isnan(temperature) && !isnan(humidity)) {
       return true;
     }
-    delay(250);
+    delay(500);  // Aumentado de 250ms a 500ms para dar mas tiempo al sensor
   }
   Serial.println("[DHT22] lectura invalida despues de 3 intentos");
   return false;
@@ -84,8 +84,13 @@ void setup() {
   // Inicializar DHT22
   pinMode(DHT_PIN, INPUT_PULLUP);
   Serial.printf("[DIAG] GPIO %d ANTES de dht.begin(): pin=%d\n", DHT_PIN, digitalRead(DHT_PIN));
+  delay(500);
+  Serial.printf("[DIAG] GPIO %d (con pull-up, sin sensor): pin=%d (deberia ser 1)\n", DHT_PIN, digitalRead(DHT_PIN));
+  if (digitalRead(DHT_PIN) == 0) {
+    Serial.println("[ERROR] GPIO stuck a 0 - revisa cortocircuito o sensor dañado, desconecta el DHT22 y prueba de nuevo");
+  }
   dht.begin();
-  delay(2000);
+  delay(5000);  // Aumentado a 5 segundos para que DHT22 se estabilice bien
   Serial.printf("[DIAG] GPIO %d DESPUES de dht.begin(): pin=%d (deberia ser 1)\n", DHT_PIN, digitalRead(DHT_PIN));
   Serial.printf("DHT22 inicializado en GPIO %d\n", DHT_PIN);
 
