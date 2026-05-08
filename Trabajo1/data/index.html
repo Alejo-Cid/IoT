@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESP32-CAM Sensor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>ESP32-CAM - Control de Sensores y LED</h1>
+        
+        <div class="sensor-box">
+            <h2>Mediciones en Tiempo Real</h2>
+            <div class="metric">
+                <span class="label">Temperatura:</span>
+                <span class="value" id="temperature">--</span>
+                <span class="unit">°C</span>
+            </div>
+            <div class="metric">
+                <span class="label">Humedad:</span>
+                <span class="value" id="humidity">--</span>
+                <span class="unit">%</span>
+            </div>
+        </div>
+
+        <div class="control-box">
+            <h2>Control de LED</h2>
+            <div class="button-group">
+                <button class="btn btn-on" onclick="toggleLED('on')">Encender LED</button>
+                <button class="btn btn-off" onclick="toggleLED('off')">Apagar LED</button>
+            </div>
+            <p class="status" id="status">Estado: --</p>
+        </div>
+
+        <div class="info-box">
+            <p><small>Actualización automática cada 2 segundos</small></p>
+            <p><small>Servidor: ESPAsyncWebServer v3.10.3</small></p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
