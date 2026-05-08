@@ -1,5 +1,5 @@
-// Actualizar métricas cada 3 segundos (DHT22 recomienda >2s entre lecturas)
-setInterval(updateMetrics, 3000);
+// Actualizar métricas cada 2 segundos
+setInterval(updateMetrics, 2000);
 
 // Actualizar al cargar la página
 window.addEventListener('load', updateMetrics);

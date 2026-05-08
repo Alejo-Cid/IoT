@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Configurar WiFi</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Configurar WiFi</h1>
+    <p>Ingresá SSID y contraseña para conectar el dispositivo a la red.</p>
+    <div>
+      <label>SSID</label>
+      <input id="ssid" type="text">
+    </div>
+    <div>
+      <label>Contraseña</label>
+      <input id="pass" type="password">
+    </div>
+    <div style="margin-top:12px;">
+      <button onclick="save()">Guardar y Conectar</button>
+    </div>
+    <p id="status"></p>
+  </div>
+  <script src="config.js"></script>
+</body>
+</html>
